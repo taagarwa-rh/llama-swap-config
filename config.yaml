@@ -1,0 +1,65 @@
+macros:
+  "latest-llama": >
+    llama-server
+    --port ${PORT}
+
+models:
+  # Large LLMs
+  gpt-oss-20b:
+    cmd: ${latest-llama} -hf ggml-org/gpt-oss-20b-GGUF --ctx-size 0 --jinja -ub 2048 -b 2048
+    ttl: 1800
+  qwen3-30b:
+    cmd: ${latest-llama} -hf unsloth/Qwen3-30B-A3B-Instruct-2507-GGUF:Q4_K_M
+    ttl: 1800
+  qwen2.5-32b:
+    cmd: ${latest-llama} -hf mradermacher/Qwen2.5-32B-GGUF:Q4_K_M
+    ttl: 1800
+  nemotron3-nano-30b:
+    cmd: ${latest-llama} -hf unsloth/Nemotron-3-Nano-30B-A3B-GGUF:Q4_K_M
+    ttl: 1800
+  ministral-3-14b:
+    cmd: ${latest-llama} -hf mistralai/Ministral-3-14B-Instruct-2512-GGUF:Q4_K_M
+    ttl: 1800
+
+  # Small Code Assist Models (always running)
+  qwen2.5-coder-1.5b:
+    cmd: ${latest-llama} -hf Qwen/Qwen2.5-Coder-1.5B-Instruct-GGUF:Q8_0
+
+  # Embedding Models
+  nomic-embed-text-v1.5:
+    cmd: ${latest-llama} -hf nomic-ai/nomic-embed-text-v1.5-GGUF:F16 --embeddings -c 8192 -b 8192 --rope-scaling yarn --rope-freq-scale .75
+    ttl: 1800
+
+groups:
+  # Put all large LLMs here so that only one runs at a time
+  "large-llms":
+    swap: true
+    exclusive: false
+    members:
+      - "gpt-oss-20b"
+      - "qwen3-30b"
+      - "qwen2.5-32b"
+      - "nemotron3-nano-30b"
+      - "ministral-3-14b"
+  
+  # Put small code assist models here so they can always be running
+  "code-assist":
+    persistent: true
+    swap: false
+    exclusive: false
+    members:
+      - "qwen2.5-coder-1.5b"
+
+  # Put embedding models here so they can be loaded as needed
+  "embedding":
+    swap: false
+    exclusive: false
+    members:
+      - "nomic-embed-text-v1.5"
+    
+
+hooks:
+  on_startup:
+    # Load code assist models on startup
+    preload:
+      - "qwen2.5-coder-1.5b"
