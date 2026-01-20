@@ -11,6 +11,11 @@ models:
   qwen3-30b:
     cmd: ${latest-llama} -hf unsloth/Qwen3-30B-A3B-Instruct-2507-GGUF:Q4_K_M
     ttl: 1800
+  qwen3-4b:
+    cmd: ${latest-llama} -hf unsloth/Qwen3-4B-Instruct-2507-GGUF:UD-Q4_K_XL
+    ttl: 1800
+    aliases: 
+      - "qwen3:4b"
   qwen2.5-32b:
     cmd: ${latest-llama} -hf mradermacher/Qwen2.5-32B-GGUF:Q4_K_M
     ttl: 1800
@@ -19,6 +24,9 @@ models:
     ttl: 1800
   ministral-3-14b:
     cmd: ${latest-llama} -hf mistralai/Ministral-3-14B-Instruct-2512-GGUF:Q4_K_M
+    ttl: 1800
+  glm-4.7-flash:
+    cmd: ${latest-llama} -hf unsloth/GLM-4.7-Flash-GGUF:UD-Q4_K_XL --jinja --threads 1 --ctx-size 32768 --temp 0.7 --top-p 1.0 --fit on
     ttl: 1800
 
   # Small Code Assist Models (always running)
@@ -41,6 +49,8 @@ groups:
       - "qwen2.5-32b"
       - "nemotron3-nano-30b"
       - "ministral-3-14b"
+      - "glm-4.7-flash"
+      - "qwen3-4b"
   
   # Put small code assist models here so they can always be running
   "code-assist":
