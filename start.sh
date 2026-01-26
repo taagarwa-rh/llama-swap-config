@@ -1,4 +1,4 @@
-if [[ $(netstat -an | grep 11434) ]]; then
+if [[ $(curl -s http://localhost:11434/v1/models) ]]; then
     echo "Server is already running."
 else
     echo "Starting server..."
