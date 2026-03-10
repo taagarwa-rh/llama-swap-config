@@ -10,12 +10,24 @@ macros:
 models:
   # Large LLMs
   gpt-oss-20b:
-    cmd: ${latest-llama} -hf unsloth/gpt-oss-20b-GGUF:F16 -ngl 99 --ctx-size 16384 --temp 1.0 --top-p 1.0 --top-k 0
+    cmd: |
+      ${latest-llama} -hf unsloth/gpt-oss-20b-GGUF:F16 \
+        -ngl 99 \
+        --ctx-size 16384 \
+        --temp 1.0 \
+        --top-p 1.0 \
+        --top-k 0
     ttl: 1800
     aliases:
       - "gpt-oss:20b"
   qwen3.5-35b-coder:
-    cmd: ${latest-llama} -hf unsloth/Qwen3.5-35B-A3B-GGUF:MXFP4_MOE --ctx-size 131702 --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0.00
+    cmd: |
+      ${latest-llama} -hf unsloth/Qwen3.5-35B-A3B-GGUF:MXFP4_MOE \
+        --ctx-size 131702 \
+        --temp 0.6 \
+        --top-p 0.95 \
+        --top-k 20 \
+        --min-p 0.00
     ttl: 1800
   qwen3.5-27b-coder:
     cmd: |
@@ -32,15 +44,16 @@ models:
     aliases: 
       - "qwen3:30b"
   qwen3-4b:
-    cmd: ${latest-llama} -hf unsloth/Qwen3-4B-Instruct-2507-GGUF:UD-Q4_K_XL --ctx-size 32000
+    cmd: |
+      ${latest-llama} -hf unsloth/Qwen3-4B-Instruct-2507-GGUF:UD-Q4_K_XL \
+        --ctx-size 32000
     ttl: 1800
     aliases: 
       - "qwen3:4b"
   qwen3-0.6b:
     cmd: |
-      ${latest-llama} 
-        -hf Qwen/Qwen3-0.6B-GGUF 
-        --ctx-size 32000 
+      ${latest-llama} -hf Qwen/Qwen3-0.6B-GGUF \
+        --ctx-size 32000 \
         --reasoning-budget 0
     ttl: 1800
     aliases: 
@@ -55,7 +68,13 @@ models:
 
   # Embedding Models
   nomic-embed-text-v1.5:
-    cmd: ${latest-llama} -hf nomic-ai/nomic-embed-text-v1.5-GGUF:F16 --embeddings -c 8192 -b 8192 --rope-scaling yarn --rope-freq-scale .75
+    cmd: |
+      ${latest-llama} -hf nomic-ai/nomic-embed-text-v1.5-GGUF:F16 \
+        --embeddings \
+        -c 8192 \
+        -b 8192 \
+        --rope-scaling yarn \
+        --rope-freq-scale .75
     ttl: 1800
 
 groups:
