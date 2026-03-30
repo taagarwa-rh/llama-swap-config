@@ -1,11 +1,16 @@
 macros:
-  "latest-llama": >
-    llama-server
-    --port ${PORT}
-    --jinja
-    --cache-ram 2048
-    --cache-type-k q8_0
-    --cache-type-v q8_0 
+  "latest-llama": |
+    llama-server \
+      --port ${PORT} \
+      --jinja \
+      -b 4096 \
+      -ub 1024 \
+      -t 10 \
+      -fa on \
+      -ngl 999 \
+      --cache-type-k q8_0 \
+      --cache-type-v q8_0
+
 
 models:
   # Large LLMs
@@ -13,7 +18,7 @@ models:
     cmd: |
       ${latest-llama} -hf unsloth/gpt-oss-20b-GGUF:F16 \
         -ngl 99 \
-        --ctx-size 16384 \
+        --ctx-size 131702 \
         --temp 1.0 \
         --top-p 1.0 \
         --top-k 0
