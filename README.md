@@ -3,6 +3,24 @@
 My personal [`llama-swap`](https://github.com/mostlygeek/llama-swap) configuration.
 This is meant to replace my Ollama configuration, so I use the same port (11434) for serving.
 
+## System Info
+
+```sh
+> system_profiler SPDisplaysDataType
+
+Graphics/Displays:
+
+    Apple M4 Pro:
+
+      Chipset Model: Apple M4 Pro
+      Type: GPU
+      Bus: Built-In
+      Total Number of Cores: 20
+      Vendor: Apple (0x106b)
+      Metal Support: Metal 4
+
+```
+
 ## Setup
 
 1. Install [`llama.cpp` with homebrew](https://github.com/ggml-org/llama.cpp/blob/master/docs/install.md#homebrew-mac-and-linux)
