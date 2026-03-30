@@ -48,6 +48,7 @@ I've also added the following to my `.zshrc` file to start the server from anywh
 alias llm-start="/path/to/llama-swap-config/start.sh"
 alias llm-stop="/path/to/llama-swap-config/stop.sh"
 alias llm-list="/path/to/llama-swap-config/list.sh"
+alias llm-config="code /path/to/llama-swap-config/config.yaml"
 ```
 
 Which enables you to run `llm-start` to start the server, `llm-list` to list available models, and `llm-stop` to stop the server.
