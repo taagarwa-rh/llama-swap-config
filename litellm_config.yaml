@@ -1,0 +1,33 @@
+litellm_settings:
+  callbacks: strip_thinking.strip_empty_thinking_blocks
+
+model_list:
+  - model_name: qwen3.6-35b-coder
+    litellm_params:
+      model: openai/qwen3.6-35b-coder
+      api_base: http://localhost:11434/v1
+      api_key: NONE
+      thinking:
+        type: "enabled"
+        budget_tokens: 100000
+      merge_reasoning_content_in_choices: true
+  - model_name: claude-opus-4-6
+    litellm_params:
+      model: vertex_ai/claude-opus-4-6@default
+      vertex_ai_project: os.environ/ANTHROPIC_VERTEX_PROJECT_ID
+      vertex_ai_location: "global"
+      thinking:
+        type: "enabled"
+        budget_tokens: 100000
+      merge_reasoning_content_in_choices: true
+
+  - model_name: smart-router
+    litellm_params:
+      model: auto_router/complexity_router
+      complexity_router_config:
+        tiers:
+          SIMPLE:    qwen3.6-35b-coder
+          MEDIUM:    claude-opus-4-6
+          COMPLEX:   claude-opus-4-6
+          REASONING: claude-opus-4-6
+      complexity_router_default_model: claude-opus-4-6
