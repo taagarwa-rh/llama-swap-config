@@ -1,3 +1,4 @@
+#!/bin/bash
 if [[ $(netstat -an | grep 11434) ]]; then
     echo "Shutting down server..."
     kill $(lsof -t -i:11434)

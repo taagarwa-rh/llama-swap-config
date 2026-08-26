@@ -62,11 +62,12 @@ chmod a+x stop.sh
 I've also added the following to my `.zshrc` file to start the server from anywhere
 
 ```sh
-# Llama-swap
-alias llm-start="/path/to/llama-swap-config/start.sh"
-alias llm-stop="/path/to/llama-swap-config/stop.sh"
-alias llm-list="/path/to/llama-swap-config/list.sh"
-alias llm-config="code /path/to/llama-swap-config/config.yaml"
+# Llama-swap (update the path to where you cloned the repo)
+LLAMA_SWAP_DIR="$HOME/path/to/llama-swap-config"
+alias llm-start="$LLAMA_SWAP_DIR/start.sh"
+alias llm-stop="$LLAMA_SWAP_DIR/stop.sh"
+alias llm-list="$LLAMA_SWAP_DIR/list.sh"
+alias llm-config="code $LLAMA_SWAP_DIR/config.yaml"
 ```
 
 Which enables you to run `llm-start` to start the server, `llm-list` to list available models, and `llm-stop` to stop the server.
