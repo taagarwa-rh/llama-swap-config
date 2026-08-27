@@ -126,6 +126,7 @@ Ensure you have logged in to your Google Cloud project and the following environ
 
 ```sh
 export ANTHROPIC_VERTEX_PROJECT_ID=
+export OPENAI_API_KEY=
 ```
 
 ### Installation
@@ -154,6 +155,7 @@ uv run litellm --config litellm_config.yaml --port 4000
 Your `litellm_config.yaml` defines:
 - **`qwen3.6-35b-coder`** → Routes to your local llama-swap at `localhost:11434`
 - **`claude-opus-4-6`** → Routes to Vertex AI (Claude)
+- **`gpt-5.6-sol`** → Routes to OpenAI's GPT-5.6 model via API key
 - **`smart-router`** → Complexity-based auto-routing between local and cloud models
 
 ### Thinking Block Cleanup (`strip_thinking.py`)
@@ -200,7 +202,11 @@ lite --api-key llm-swap-secret-key chat --skip-verify --model qwen3.6-35b-coder
 Add these to your `~/.zshrc`:
 
 ```sh
+# LiteLLM (update the path to where you cloned the repo)
+LLAMA_SWAP_DIR="$HOME/path/to/llama-swap-config"
 export LITELLM_PROXY_API_KEY="llm-swap-secret-key"
+alias litellm-start="$LLAMA_SWAP_DIR/litellm-start.sh"
+alias litellm-stop="$LLAMA_SWAP_DIR/litellm-stop.sh"
 alias lite-chat='lite --api-key $LITELLM_PROXY_API_KEY chat --skip-verify'
 alias lite-claude='export ANTHROPIC_MODEL='smart-router'; unset CLAUDE_CODE_USE_VERTEX; unset ANTHROPIC_SMALL_FAST_MODEL; lite --api-key $LITELLM_PROXY_API_KEY claude --skip-verify'
 ```
