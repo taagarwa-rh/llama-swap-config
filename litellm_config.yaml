@@ -20,6 +20,10 @@ model_list:
         type: "enabled"
         budget_tokens: 100000
       merge_reasoning_content_in_choices: true
+  - model_name: gpt-5.6-sol
+    litellm_params:
+      model: openai/gpt-5.6-sol
+      api_key: os.environ/OPENAI_API_KEY
 
   - model_name: smart-router
     litellm_params:
@@ -27,7 +31,7 @@ model_list:
       complexity_router_config:
         tiers:
           SIMPLE:    qwen3.6-35b-coder
-          MEDIUM:    claude-opus-4-6
-          COMPLEX:   claude-opus-4-6
-          REASONING: claude-opus-4-6
-      complexity_router_default_model: claude-opus-4-6
+          MEDIUM:    gpt-5.6-sol
+          COMPLEX:   gpt-5.6-sol
+          REASONING: gpt-5.6-sol
+      complexity_router_default_model: gpt-5.6-sol
