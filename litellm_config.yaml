@@ -31,7 +31,7 @@ model_list:
       complexity_router_config:
         tiers:
           SIMPLE:    qwen3.6-35b-coder
-          MEDIUM:    gpt-5.6-sol
+          MEDIUM:    gpt-5.6-terra
           COMPLEX:   gpt-5.6-sol
           REASONING: gpt-5.6-sol
       complexity_router_default_model: gpt-5.6-sol
