@@ -132,8 +132,14 @@ export OPENAI_API_KEY=
 ### Installation
 
 ```sh
+# Install globally
+uv tool install 'litellm[cli,proxy,google]'
+
+# Install in a virtual environment
 uv pip install 'litellm[cli,proxy,google]'
 ```
+
+This will add the `lite`, `litellm`, and `litellm-proxy` CLIs to your machine.
 
 ### Running the Proxy
 
@@ -176,6 +182,7 @@ Once running on port 4000, use it as your OpenAI-compatible endpoint:
 # Test with curl
 curl http://localhost:4000/v1/chat/completions \
   -H "Content-Type: application/json" \
+  -H "Authorization: Bearer llm-swap-secret-key" \
   -d '{
     "model": "smart-router",
     "messages": [{"role": "user", "content": "Hello!"}]
